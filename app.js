@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
 
+require('express-async-errors');
 
 
 
@@ -12,13 +13,14 @@ const api = process.env.API_URL
 const app = express()
 const port = 3000 || process.env.PORT
 
-const cors = require('')
+const cors = require('cors')
 
 const productsRouter = require('./routes/products')
 const categoriesRouter = require('./routes/categories')
 const ordersRouter = require('./routes/orders')
 const orderItemsRouter = require('./routes/orderItems')
-const usersRouter = require('./routes/users')
+const usersRouter = require('./routes/users');
+const errorHandler = require('./middleware/errorHandler');
 
 app.use(cors())
 app.use('*', cors())
@@ -28,10 +30,16 @@ app.use(express.json())
 app.use(morgan('tiny'))
 
 
+
+
+
 app.use(`${api}/products`, productsRouter)
 app.use(`${api}/orders`, ordersRouter)
 app.use(`${api}/orderItems`, orderItemsRouter)
 app.use(`${api}/users`, usersRouter)
+app.use(`${api}/categories`, categoriesRouter)
+
+app.use(errorHandler)
 
 
 

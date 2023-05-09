@@ -4,7 +4,7 @@ const router = express();
 const { Order } = require('../models/order')
 
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     res.send('orders')
 }) 
 
