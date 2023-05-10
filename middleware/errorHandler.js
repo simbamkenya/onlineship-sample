@@ -1,4 +1,4 @@
 module.exports = async function(err, req, res, next){
-    res.status(500).send('something failed')
+    res.status(500).send(err)
 }
 
